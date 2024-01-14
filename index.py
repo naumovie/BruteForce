@@ -1,10 +1,7 @@
 import random
 import matplotlib.pyplot as plt
+from ProjectivePlane import ProjectivePlane
 
- 
-plt.plot([1,2,10],[3,4,10])
-plt.show()
+plane = ProjectivePlane([2])
 
-print("Hello3")
-print("Hello4")
-print("Hello")
+plane.display_data()

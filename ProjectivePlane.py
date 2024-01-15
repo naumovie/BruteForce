@@ -41,6 +41,25 @@ class ProjectivePlane():
         self._data = input_data
 
     @staticmethod
+    def isProjectivePlane(matrix, hyper_params):
+        q = hyper_params[0]
+        n = q**2 + q + 1
+        result = True
+
+        """
+        1. Every line contains q + 1 points
+        2. Every point lies on q + 1 lines
+        3. Any two distinct lines intersect in a unique point
+        4. Any two distinct points lie on a unique line.
+        """
+
+        #1
+        if not all(sum(row) == q+1 for row in matrix): return False
+        #2
+        
+
+
+    @staticmethod
     def getFitness(matrix, hyper_params):
         fitness = None
         q = hyper_params[0]

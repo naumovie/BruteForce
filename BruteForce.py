@@ -1,24 +1,25 @@
 from ProjectivePlane import ProjectivePlane
+from itertools import combinations
+from itertools import permutations
 
 class BruteForce():
     def __init__(self, data):
         self._data = data
 
-    def start():
+    @staticmethod
+    def start(hyper_params):
+        q = hyper_params[0]
+        row = [1]*(q+1)+[0]*(q**2+q+1)
+        all_row_permutations = list(set(permutations(row)))
+        all_plane_combinations = list(combinations(all_row_permutations, q**2+q+1))
+
+        #for plane in all_plane_combinations:
+          # if  ProjectivePlane.isProjectivePlane(list(plane), [q]): return list(plane)
+
+
         return False
     
-    @staticmethod
-    def find_projective_plane(order):
-        q = order - 1
-
-        # Generate all possible binary matrices of order x (2^x combinations)
-        for i in range(2**(q*q)):
-            matrix = [[int(x) for x in bin(i)[2:].zfill(q*q)[j]] for j in range(q)]
-            
-            if ProjectivePlane.isProjectivePlane(matrix, [q]):
-                return matrix
-
-        return None
+    
 
    
    

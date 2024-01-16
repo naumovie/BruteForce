@@ -151,13 +151,15 @@ matrix = [
 
 display_permutations(matrix)
 """
+print("test")
+row = [1] * 2 + [0] * 3
 
-row = [1] * 4 + [0] * 9
 all_perm = list(set(permutations(row)))
-print(len(all_perm))
+#print(all_perm)
+# print(len(all_perm[0:10]))
 
 #print(all_perm[0:10])
-#comb = combinations(all_perm[0:10], 7)
+comb = list(combinations(all_perm, 3))
 
-#([x for x in comb])
-#print(len([x for x in all_perm]))
+print(list(comb[0]))
+

@@ -152,7 +152,7 @@ matrix = [
 display_permutations(matrix)
 """
 print("test")
-row = [1] * 2 + [0] * 3
+row = [1] * 3 + [0] * 4
 
 all_perm = list(set(permutations(row)))
 #print(all_perm)

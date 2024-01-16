@@ -36,7 +36,7 @@ class ProjectivePlane():
             print(self._data[i], " ", sum(self._data[i]))
 
     def get_data(self):
-        return self._data
+        return self._data.copy()
 
     def set_data(self, input_data):
         self._data = input_data

@@ -12,29 +12,32 @@ class SimulatedAnnealing():
         self._alpha = hyper_params[1]
         self._iter_limit = hyper_params[2]
         self._resultsLog = []
+        self._iter_number = 0
 
      
     def start(self):
+        self._resultsLog = []
         self._current_state = self._data.get_data()
-
+        self._iter_number = 0
         T = self._T0
-        iter_number = 0
-        while T > 0.001 and iter_number < self._iter_limit:
+        
+        while T > 0.001 and self._iter_number < self._iter_limit:
+            #print("in while", T, self._iter_number)
             next_state = self.generate_state()
 
             fitness_next_state = ProjectivePlane.getFitness(next_state,self._data._hyper_params)
             fitness_current_state = ProjectivePlane.getFitness(self._current_state, self._data._hyper_params)
 
             if fitness_next_state < fitness_current_state:  
-                self.set_new_state(next_state)
+                self.set_new_state(next_state, fitness_next_state)
             elif math.exp(-(fitness_current_state-fitness_next_state)/T) > random.random():
-                self.set_new_state(next_state)
+                self.set_new_state(next_state, fitness_next_state)
 
             if fitness_current_state == 0: return self._current_state
 
-            T = self._T0*self._alpha**iter_number
-            iter_number += 1
-        print("T and iter: ", T, iter_number)
+            T = self._T0*self._alpha**self._iter_number
+            self._iter_number += 1
+        print("T and iter: ", T, self._iter_number)
         return False
 
 
@@ -52,9 +55,9 @@ class SimulatedAnnealing():
         return next_state
 
     
-    def set_new_state(self, new_state):
+    def set_new_state(self, new_state, fitness_next_state):
         self._current_state = new_state
-        self._resultsLog.append(self._current_state)
+        self._resultsLog.append(fitness_next_state)
     
     
 

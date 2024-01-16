@@ -1,5 +1,6 @@
 import random as rnd
 import numpy as np
+from itertools import combinations
 
 
 class ProjectivePlane():
@@ -32,7 +33,7 @@ class ProjectivePlane():
     def display_data(self):
         print("lines: {0}, columns: {1}".format(len(self._data), len(self._data[0])))
         for i in range(len(self._data)):
-            print(self._data[i])
+            print(self._data[i], " ", sum(self._data[i]))
 
     def get_data(self):
         return self._data
@@ -56,8 +57,20 @@ class ProjectivePlane():
         #1
         if not all(sum(row) == q+1 for row in matrix): return False
         #2
+        if not all([sum([matrix[i][j] for i in range(n)]) == q+1 for j in range(n)]): return False
+        #3 
+        for pair in combinations(range(n), 2):
+            common_points = (sum(matrix[pair[0]][j] * matrix[pair[1]][j] for j in range(n)))
+            if common_points != 1: return False
+        #4 
+        for pair in combinations(range(n), 2):
+            common_lines = (sum(matrix[i][pair[0]]*matrix[i][pair[1]] for i in range(n)))
+            if common_lines != 1: return False
         
 
+        return True
+    
+    
 
     @staticmethod
     def getFitness(matrix, hyper_params):

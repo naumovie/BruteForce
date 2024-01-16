@@ -10,7 +10,8 @@ class BruteForce():
     def start(hyper_params):
         q = hyper_params[0]
         row = [1]*(q+1)+[0]*(q**2)
-        all_row_permutations = list(set(permutations(row)))
+        #all_row_permutations = list(set(permutations(row)))
+        all_row_permutations = list(combinations(row, q**2+q+1))
         all_plane_combinations = list(combinations(all_row_permutations, q**2+q+1))
 
         for plane in all_plane_combinations:

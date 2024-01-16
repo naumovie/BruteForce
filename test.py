@@ -154,12 +154,19 @@ display_permutations(matrix)
 print("test")
 row = [1] * 3 + [0] * 4
 
-all_perm = list(set(permutations(row)))
+#all_perm = list(set(permutations(row)))
 #print(all_perm)
 # print(len(all_perm[0:10]))
 
-#print(all_perm[0:10])
-comb = list(combinations(all_perm, 3))
+#print(all_perm[0:10]
 
-print(list(comb[0]))
+matrix = [
+    [1, 0, 0],
+    [1, 0, 0],
+    [1, 0, 0],
+    [1, 0, 0]
+]
 
+list1 = [1,2,3,4,5,6]
+list1[0], list1[2] = list1[2], list1[0]
+print(list1)

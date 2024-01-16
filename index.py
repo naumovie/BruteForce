@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 from ProjectivePlane import ProjectivePlane
 from Statistics import Statistics
 from BruteForce import BruteForce
+from SimulatedAnnealing import SimulatedAnnealing
 
 #plane2 = Statistics.convertDecToBitMatrix([[1,2,4],[1,3,7],[2,6,7],[1,5,6],[4,5,7],[3,4,6],[2,3,5]],2)
 #print(plane2)
@@ -24,4 +25,7 @@ from BruteForce import BruteForce
 
 #print(all2(sum(num) %2 == 1 for num in x))
 
-print(BruteForce.start([2]))
+SA = SimulatedAnnealing(ProjectivePlane([2]), [1000, 0.99, 100000])
+
+
+

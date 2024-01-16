@@ -25,7 +25,14 @@ from SimulatedAnnealing import SimulatedAnnealing
 
 #print(all2(sum(num) %2 == 1 for num in x))
 
-SA = SimulatedAnnealing(ProjectivePlane([2]), [1000, 0.99, 100000])
+SA = SimulatedAnnealing(ProjectivePlane([3]), [10000000, 0.99, 100000])
+k = 0
+while True:
+    k += 1
+    print(k)
+    res = SA.start()
+    if res != False:
+        print(res, ProjectivePlane.getFitness(res, [3]))
 
 
 

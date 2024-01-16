@@ -19,7 +19,7 @@ class SimulatedAnnealing():
 
         T = self._T0
         iter_number = 0
-        while T > 0.01 and iter_number < self._iter_limit:
+        while T > 0.001 and iter_number < self._iter_limit:
             next_state = self.generate_state()
 
             fitness_next_state = ProjectivePlane.getFitness(next_state,self._data._hyper_params)
@@ -34,7 +34,7 @@ class SimulatedAnnealing():
 
             T = self._T0*self._alpha**iter_number
             iter_number += 1
-
+        print("T and iter: ", T, iter_number)
         return False
 
 

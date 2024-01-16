@@ -19,8 +19,8 @@ class Statistics:
             Statistics.display_data(data[i])
 
     @staticmethod
-    def convertDecToBitMatrix(matricDec, Q):
-        q = Q
+    def convertDecToBitMatrix(matricDec):
+        q = len(matricDec[0])-1
         N = q ** 2 + q + 1
         data = []
         for i in range(N):

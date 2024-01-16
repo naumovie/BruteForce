@@ -74,6 +74,24 @@ class ProjectivePlane():
 
     @staticmethod
     def getFitness(matrix, hyper_params):
+        q = hyper_params[0]
+        n = q**2 + q + 1
+        
+
+        """
+        1. Every line contains q + 1 points
+        2. Every point lies on q + 1 lines
+        3. Any two distinct lines intersect in a unique point
+        4. Any two distinct points lie on a unique line.
+        """
+        fitness = 0 
+        fitness = ProjectivePlane.getFitness_LinesPerPoint(matrix, hyper_params) 
+        + ProjectivePlane.getFitness_LineIntersection(matrix,hyper_params) 
+        + ProjectivePlane.getFitness_PointsCollinear(matrix,hyper_params)
+
+        return fitness
+       
+        """
         fitness = None
         q = hyper_params[0]
         fitness = ProjectivePlane.getFitness_PointPerLine(matrix, q) + ProjectivePlane.getFitness_LineIntersection(
@@ -81,18 +99,38 @@ class ProjectivePlane():
         # print("fitness:{0}, pointperline:{1}, lineinter:{2}".format(fitness,ProjectivePlane.getFitness_PointPerLine(matrix, q),ProjectivePlane.getFitness_LineIntersection(
         #     matrix, q)))
         return fitness
+        """
 
     @staticmethod
-    def getFitness_PointPerLine(matrix, q):
-        count = 0
+    def getFitness_LinesPerPoint(matrix, hyper_params):
+        q = hyper_params[0]
+        fitness = 0
+        n = q**2 + q + 1
+
+        fitness = sum(([sum([matrix[i][j] for i in range(n)]) != q+1 for j in range(n)]))
+
+        return fitness
+
+        """count = 0
         np_matrix = np.array(matrix)
         for i in range(len(matrix[0])):
             if (sum(np_matrix[:, i])) != q + 1:
                 count += 1
         return count
+        """
 
     @staticmethod
-    def getFitness_LineIntersection(matrix, q):
+    def getFitness_LineIntersection(matrix, hyper_params):
+        q = hyper_params[0]
+        fitness = 0
+        n = q**2 + q + 1
+        count = 0
+        for pair in combinations(range(n), 2):
+            common_points = (sum(matrix[pair[0]][j] * matrix[pair[1]][j] for j in range(n)))
+            if common_points != 1: fitness += 1
+
+        return fitness
+        """
         count = 0
         for i in range(len(matrix)):
             for j in range(len(matrix)):
@@ -102,6 +140,21 @@ class ProjectivePlane():
                         count += 1
 
         return count
+        """
+
+    @staticmethod
+    def getFitness_PointsCollinear(matrix, hyper_params):
+        q = hyper_params[0]
+        fitness = 0
+        n = q**2 + q + 1
+        
+
+        for pair in combinations(range(n), 2):
+            common_lines = (sum(matrix[i][pair[0]]*matrix[i][pair[1]] for i in range(n)))
+            if common_lines != 1: fitness += 1
+
+        return fitness
+
 
     def get_params(self):
         return self._hyper_params

@@ -1,6 +1,8 @@
 from itertools import combinations
 from itertools import permutations
 import random
+from ProjectivePlane import ProjectivePlane
+from Statistics import Statistics
 
 matrix = [
     [1,2,3],
@@ -159,7 +161,7 @@ row = [1] * 3 + [0] * 4
 # print(len(all_perm[0:10]))
 
 #print(all_perm[0:10]
-
+"""
 matrix = [
     [1, 0, 0],
     [1, 0, 0],
@@ -170,3 +172,10 @@ matrix = [
 list1 = [1,2,3,4,5,6]
 list1[0], list1[2] = list1[2], list1[0]
 print(list1)
+"""
+print(sum([True, True, False]))
+
+plane2 = Statistics.convertDecToBitMatrix([[1,2,4],[1,3,7],[2,6,7],[1,5,6],[4,5,7],[3,4,6],[2,3,5]])
+plane = ProjectivePlane([2])
+plane.display_data()
+print(plane.getFitness_LineIntersection(plane.get_data(), [2]), plane.getFitness_LinesPerPoint(plane.get_data(), [2]), plane.getFitness_PointsCollinear(plane.get_data(), [2]))
